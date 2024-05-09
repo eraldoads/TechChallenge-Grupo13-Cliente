@@ -43,6 +43,7 @@ jobs:
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
 
       - name: Build and analyze
+        working-directory: ./APICliente/APICliente
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -50,6 +51,6 @@ jobs:
         run: |
           dotnet tool install --global JetBrains.dotCover.GlobalTool
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"eraldoads_TechChallenge-Grupo13-Cliente" /o:"sonarcloud-github-2024" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.dotcover.reportsPaths="**/*.html"
-          dotnet build ./APICliente/APICliente/APICliente.sln --no-incremental
+          dotnet build --no-incremental
           dotnet dotcover test --dcReportType=HTML
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
