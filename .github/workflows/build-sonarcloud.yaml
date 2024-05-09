@@ -50,10 +50,7 @@ jobs:
         run: |
           dotnet tool install --global dotnet-coverage
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"eraldoads_TechChallenge-Grupo13-Cliente" 
-          /o:"sonarcloud-github-2024" 
-          /d:sonar.token="${{ secrets.SONAR_TOKEN }}" 
-          /d:sonar.host.url="https://sonarcloud.io" 
-          /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
+          /o:"sonarcloud-github-2024" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
           dotnet build APICliente/APICliente.sln --no-incremental
           dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
