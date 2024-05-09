@@ -3,7 +3,7 @@ name: Build and Push to ECR
 on:
   push:
     branches:
-      - feature/felipe-aws
+      - develop
 
 jobs:
   build:
