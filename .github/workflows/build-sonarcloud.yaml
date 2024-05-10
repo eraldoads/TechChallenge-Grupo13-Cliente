@@ -40,8 +40,8 @@ jobs:
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: pwsh
         run: |
-          New-Item -Path .\.sonar\scanner -ItemType Directory
-          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+          New-Item -Path .sonar\scanner -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path .sonar\scanner
 
       - name: Build and analyze
         working-directory: ./APICliente
@@ -51,7 +51,7 @@ jobs:
         shell: pwsh
         run: |          
           dotnet tool install --global dotnet-coverage
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"eraldoads_TechChallenge-Grupo13-Cliente" /o:"sonarcloud-github-2024" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml          
+          .sonar\scanner\dotnet-sonarscanner begin /k:"eraldoads_TechChallenge-Grupo13-Cliente" /o:"sonarcloud-github-2024" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml          
           dotnet build APICliente.sln --configuration Release --no-incremental          
           dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"          
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          .sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
