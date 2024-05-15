@@ -18,3 +18,5 @@ Utilizamos a ferramenta SonarCloud para análise de código e cobertura de teste
 https://sonarcloud.io/summary/overall?id=eraldoads_TechChallenge-Grupo13-Cliente
 
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13-Cliente/assets/47857203/cf911e32-016a-4429-8122-61bc2085eecb)
+![image](https://github.com/eraldoads/TechChallenge-Grupo13-Cliente/assets/47857203/0a5ca248-8be2-449d-99a9-1c28eccd486f)
+
