@@ -9,9 +9,7 @@ Tanto o build e push para o repositório no ECR da AWS usando Terraform, quanto 
 🧑🏻‍💻 *<b>RM352032</b>*: Luís Felipe Amengual Tatsch </br>
 
 ## Arquitetura
-![image](https://github.com/eraldoads/TechChallenge-Grupo13-Cliente/assets/47857203/50e7f59e-d8fe-4b7c-a54e-57991e6a779c)
-
-
+![image](https://github.com/eraldoads/TechChallenge-Grupo13-Cliente/assets/47857203/2fa81645-598e-49b3-aa34-0675ef505d6d)
 
 ## Testes
 
