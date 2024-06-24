@@ -11,7 +11,6 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-
     [Produces("application/json", new string[] { })]
     [SwaggerResponse(204, "Requisição concluída sem dados de retorno.", null)]
     [SwaggerResponse(400, "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.", null)]
@@ -21,7 +20,6 @@ namespace API.Controllers
     [SwaggerResponse(412, "Condição prévia dada em um ou mais dos campos avaliada como falsa.", null)]
     [SwaggerResponse(500, "O servidor encontrou uma condição inesperada.", null)]
     [Consumes("application/json", new string[] { })]
-
     public class ClienteController : ControllerBase
     {
         private readonly IClienteService _clienteService;
@@ -31,7 +29,6 @@ namespace API.Controllers
             _clienteService = clienteService;
         }
 
-        // GET: /clientes
         [HttpGet()]
         [SwaggerOperation(
         Summary = "Endpoint para listar todos os clientes cadastrados",
@@ -46,7 +43,6 @@ namespace API.Controllers
             return clientes;
         }
 
-        // GET: /clientes/{id}
         [HttpGet("{id}")]
         [SwaggerOperation(
         Summary = "Endpoint para listar um cliente específico pelo id",
@@ -68,7 +64,6 @@ namespace API.Controllers
             return cliente;
         }
 
-        // POST: /clientes
         [HttpPost]
         [SwaggerOperation(
         Summary = "Endpoint para criar um novo cliente",
@@ -100,7 +95,6 @@ namespace API.Controllers
             }
         }
 
-        // PATCH: /clientes/{id}
         [HttpPatch("{id}")]
         [SwaggerOperation(
             Summary = "Endpoint para atualizar parcialmente um cliente pelo ID",
@@ -137,9 +131,7 @@ namespace API.Controllers
             }
         }
 
-        // PUT: /clientes/{id}
         [HttpPut("{id}")]
-        [AjustaDataHoraLocal]
         [SwaggerOperation(
         Summary = "Endpoint para atualizar completamente um cliente pelo id",
         Description = @"Endpoint para atualizar completamente um cliente pelo id </br>
@@ -174,7 +166,6 @@ namespace API.Controllers
             }
         }
 
-        // DELETE: /clientes/{id}
         [HttpDelete("{id}")]
         [SwaggerOperation(
         Summary = "Endpoint para deletar um cliente pelo id",
@@ -195,6 +186,38 @@ namespace API.Controllers
                     return NoContent();
 
                 return deletedCliente;
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound(new { id, error = "Cliente não encontrado" });
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocorreu um erro interno. Por favor, tente novamente mais tarde.");
+            }
+        }
+
+        [HttpDelete("inativa/{id}")]
+        [SwaggerOperation(
+        Summary = "Endpoint para inativar um cliente pelo id",
+        Description = @"Endpoint para inativar um cliente pelo id </br>
+              <b>Parâmetros de entrada:</b>
+                <br/> • <b>id</b>: o identificador do cliente a ser inativado ⇒ <font color='red'><b>Obrigatório</b></font>
+                ",
+        Tags = new[] { "Clientes" }
+        )]
+        [SwaggerResponse(200, "Cliente inativado com sucesso!", typeof(Cliente))]
+        public async Task<ActionResult<Cliente>> InativaDeleteCliente(int id)
+        {
+            try
+            {
+                var cliente = await _clienteService.InativaDeleteCliente(id);
+
+                return cliente;
             }
             catch (KeyNotFoundException)
             {
