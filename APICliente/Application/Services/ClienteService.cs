@@ -89,6 +89,8 @@ namespace Application.Interfaces
             cliente.CPF = clienteInput.CPF;
             cliente.Nome = clienteInput.Nome;
             cliente.Sobrenome = clienteInput.Sobrenome;
+            cliente.Endereco = clienteInput.Endereco;
+            cliente.NumeroTelefone = clienteInput.NumeroTelefone;
 
             await UpdateCliente(cliente);
         }
@@ -119,6 +121,14 @@ namespace Application.Interfaces
             return cliente;
         }
 
+        public async Task<Cliente> InativaDeleteCliente(int id)
+        {
+            var cliente = await GetClienteById(id) ?? throw new KeyNotFoundException("Cliente não encontrado.");
+            await _clienteRepository.InativaDeleteCliente(id);
+
+            return cliente;
+        }
+
         // Métodos Privados.
         #region [Métodos Privados]
         /// <summary>
@@ -139,7 +149,7 @@ namespace Application.Interfaces
         private static bool ValidateClienteDTO(ClienteDTO clienteDTO, out ICollection<ValidationResult> results)
         {
             var context = new ValidationContext(clienteDTO, serviceProvider: null, items: null);
-            results = [];
+            results = new List<ValidationResult>();
 
             return Validator.TryValidateObject(clienteDTO, context, results, true);
         }
@@ -156,7 +166,9 @@ namespace Application.Interfaces
                 Nome = clienteDto.Nome,
                 Sobrenome = clienteDto.Sobrenome,
                 CPF = clienteDto.CPF,
-                Email = clienteDto.Email
+                Email = clienteDto.Email,
+                Endereco = clienteDto.Endereco,
+                NumeroTelefone = clienteDto.NumeroTelefone
             };
         }
         #endregion

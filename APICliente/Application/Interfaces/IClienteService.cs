@@ -13,5 +13,6 @@ namespace Application.Interfaces
         Task PatchCliente(int idCliente, JsonPatchDocument<Cliente> patchDoc);
         Task PutCliente(int idCliente, Cliente clienteInput);
         Task<Cliente> DeleteCliente(int id);
+        Task<Cliente> InativaDeleteCliente(int id);
     }
 }

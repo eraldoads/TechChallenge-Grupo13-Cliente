@@ -5,9 +5,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain.EntitiesDTO
 {
-    /// <summary>
-    /// Transferir dados entre camadas.
-    /// </summary>
     [SwaggerSchemaFilter(typeof(ClienteSchemaFilter))]
     public class ClienteDTO
     {
@@ -32,5 +29,11 @@ namespace Domain.EntitiesDTO
         [JsonProperty("email")]
         [EmailAddress(ErrorMessage = "O e-mail informado é inválido")]
         public string? Email { get; set; }
+
+        [JsonProperty("endereco")]
+        public string? Endereco { get; set; }
+
+        [JsonProperty("numeroTelefone")]
+        public string? NumeroTelefone { get; set; }
     }
 }
