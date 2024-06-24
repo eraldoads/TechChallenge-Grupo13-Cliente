@@ -20,7 +20,11 @@ namespace Domain.ValueObjects
                     ["nome"] = new OpenApiString("string"),
                     ["sobrenome"] = new OpenApiString("string"),
                     ["cpf"] = new OpenApiString("string"),
-                    ["email"] = new OpenApiString("string")
+                    ["email"] = new OpenApiString("string"),
+                    ["endereco"] = new OpenApiString("string"),
+                    ["numeroTelefone"] = new OpenApiString("string"),
+                    ["ativo"] = new OpenApiBoolean(true),
+                    ["dataInativacao"] = new OpenApiDateTime(DateTimeOffset.UtcNow)
                 };
                 // Atribui o exemplo ao esquema.
                 schema.Example = modeloCliente;
@@ -35,7 +39,9 @@ namespace Domain.ValueObjects
                     ["nome"] = new OpenApiString("string"),
                     ["sobrenome"] = new OpenApiString("string"),
                     ["cpf"] = new OpenApiString("string"),
-                    ["email"] = new OpenApiString("string")
+                    ["email"] = new OpenApiString("string"),
+                    ["endereco"] = new OpenApiString("string"),
+                    ["numeroTelefone"] = new OpenApiString("string")
                 };
                 // Atribui o exemplo ao esquema.
                 schema.Example = modeloCliente;
