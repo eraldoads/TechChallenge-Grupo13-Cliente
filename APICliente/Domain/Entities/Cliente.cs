@@ -32,5 +32,17 @@ namespace Domain.Entities
         [JsonProperty("email")]
         [EmailAddress(ErrorMessage = "O e-mail informado é inválido")]
         public string? Email { get; set; }
+
+        [JsonProperty("endereco")]
+        public string? Endereco { get; set; }
+
+        [JsonProperty("numeroTelefone")]
+        public string? NumeroTelefone { get; set; }
+
+        [JsonProperty("ativo")]
+        public bool Ativo { get; set; } = true; // Default é true para cliente ativo
+
+        [JsonProperty("dataInativacao")]
+        public DateTime? DataInativacao { get; set; }
     }
 }
