@@ -8,6 +8,23 @@ Tanto o build e push para o repositório no ECR da AWS usando Terraform, quanto 
 🧑🏻‍💻 *<b>RM352316</b>*: Eraldo Antonio Rodrigues </br>
 🧑🏻‍💻 *<b>RM352032</b>*: Luís Felipe Amengual Tatsch </br>
 
+## LGPD - Lei Geral de Proteção de Dados
+Na fase 5, adicionamos um endpoint à API para possibilitar ao cliente solicitar a exclusão dos seus dados pessoais. 
+
+Optamos pela exclusão lógica, onde setamos a data de inativação do cliente e este passa a não ser retornado no endpoint de consulta de clientes.
+
+![image](https://github.com/user-attachments/assets/fac439c1-17af-4d6f-bc42-26244a75316a)
+
+![image](https://github.com/user-attachments/assets/477e6d77-4fb2-47eb-93cf-504b72f6af12)
+
+Na figura abaixo, podemos observar que os clientes inativados não são retornados na consulta:
+
+![image](https://github.com/user-attachments/assets/b16ae21d-8d88-4b9f-be49-c4b0a0037b16)
+
+Com base na LGPD-Lei Geral de Proteção de Dados e do contexto do negócio da lanchonete, realizamos o mapeamento dos processos nos quais é realizado o tratamento de dados e os riscos associados.
+
+Esse mapeamento originou o RIPD - Relatório de Impacto de Dados Pessoais, o qual se encontra na raiz desse projeto.
+
 ## Arquitetura
 Quando disparamos a Github Action, é realizado o build da aplicação e o push para o repositório criado previamente no Elastic Container Registry (ECS).
 Ao final da action, é atualizada a Service no Elastic Container Service (ECS), executando assim a service que irá realizar a criação do container.
