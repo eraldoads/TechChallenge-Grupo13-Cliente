@@ -80,7 +80,7 @@ namespace APICliente
                     // Define a versão da documentação Swagger como "v1".
                     c.SwaggerDoc("v1", new OpenApiInfo
                     {
-                        Title = "Tech Challenge - Grupo 13 - Fase IV",
+                        Title = "Tech Challenge - Grupo 13 - Fase V",
                         Description = "Documentação dos endpoints da API sobre o uso de microsserviços de clientes.",
                         Contact = new OpenApiContact() { Name = "Tech Challenge - Grupo 13", Email = "grupo13@fiap.com" },
                         License = new OpenApiLicense() { Name = "MIT License", Url = new Uri("https://opensource.org/licenses/MIT") },

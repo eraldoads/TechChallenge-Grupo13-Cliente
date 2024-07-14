@@ -93,6 +93,12 @@ namespace Data.Repository
 
             cliente.Ativo = false;
             cliente.DataInativacao = DateTime.UtcNow;
+            cliente.Nome = new string('*', cliente.Nome.Length);
+            cliente.Sobrenome = new string('*', cliente.Sobrenome.Length);
+            cliente.CPF = new string('*', cliente.CPF.Length);
+            cliente.Email = new string('*', cliente.Email.Length);
+            cliente.Endereco = new string('*', string.IsNullOrEmpty(cliente.Endereco) ? 10 : cliente.Endereco.Length);
+            cliente.NumeroTelefone = new string('*', string.IsNullOrEmpty(cliente.NumeroTelefone) ? 10 : cliente.NumeroTelefone.Length);
             return await _context.SaveChangesAsync();
         }
 
