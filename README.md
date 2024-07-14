@@ -11,15 +11,16 @@ Tanto o build e push para o repositório no ECR da AWS usando Terraform, quanto 
 ## LGPD - Lei Geral de Proteção de Dados
 Na fase 5, adicionamos um endpoint à API para possibilitar ao cliente solicitar a exclusão dos seus dados pessoais. 
 
-Optamos pela exclusão lógica, onde setamos a data de inativação do cliente e este passa a não ser retornado no endpoint de consulta de clientes.
+Optamos pela exclusão lógica, onde reaizamos a anonimizacação de seus dados para que não seja possível posterior identificação, setamos a data de inativação do cliente e este passa a não ser retornado no endpoint de consulta de clientes.
 
-![image](https://github.com/user-attachments/assets/fac439c1-17af-4d6f-bc42-26244a75316a)
+![image](https://github.com/user-attachments/assets/b0a7b7f3-7159-42dc-9227-cc106346d841)
 
-![image](https://github.com/user-attachments/assets/477e6d77-4fb2-47eb-93cf-504b72f6af12)
+![image](https://github.com/user-attachments/assets/6709a758-d7b6-4cca-bffe-a7ec9e407ecf)
 
 Na figura abaixo, podemos observar que os clientes inativados não são retornados na consulta:
 
-![image](https://github.com/user-attachments/assets/b16ae21d-8d88-4b9f-be49-c4b0a0037b16)
+![image](https://github.com/user-attachments/assets/f4edbeb7-aa6c-4024-9e9c-a48457a5289a)
+
 
 Com base na LGPD-Lei Geral de Proteção de Dados e do contexto do negócio da lanchonete, realizamos o mapeamento dos processos nos quais é realizado o tratamento de dados e os riscos associados.
 
