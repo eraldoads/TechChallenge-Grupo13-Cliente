@@ -10,5 +10,6 @@ namespace Domain.Interfaces
         Task<Cliente> PostCliente(Cliente cliente);
         Task<int> UpdateCliente(Cliente cliente);
         Task<int> DeleteCliente(int id);
+        Task<int> InativaDeleteCliente(int id);
     }
 }

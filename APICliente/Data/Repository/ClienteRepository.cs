@@ -19,7 +19,7 @@ namespace Data.Repository
         /// <returns>Uma lista de todos os clientes no contexto.</returns>
         public async Task<List<Cliente>> GetClientes()
         {
-            return await _context.Cliente.ToListAsync();
+            return await _context.Cliente.Where(c => c.Ativo).ToListAsync();
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Data.Repository
         {
             var cliente = await _context.Cliente.FindAsync(id);
 
-            return cliente;
+            return cliente?.Ativo == true ? cliente : null;
         }
 
         /// <summary>
@@ -41,7 +41,9 @@ namespace Data.Repository
         /// <returns>O cliente correspondente ao CPF fornecido.</returns>
         public async Task<Cliente?> GetClienteByCpf(string cpf)
         {
-            return await _context.Cliente.FirstOrDefaultAsync(c => c.CPF == cpf);
+            var cliente = await _context.Cliente.FirstOrDefaultAsync(c => c.CPF == cpf);
+
+            return cliente?.Ativo == true ? cliente : null;
         }
 
         /// <summary>
@@ -82,6 +84,20 @@ namespace Data.Repository
             var cliente = await _context.Cliente.FindAsync(id) ?? throw new KeyNotFoundException($"O cliente com o ID {id} não foi encontrado.");
 
             _context.Cliente.Remove(cliente);
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> InativaDeleteCliente(int id)
+        {
+            var cliente = await _context.Cliente.FindAsync(id) ?? throw new KeyNotFoundException($"O cliente com o ID {id} não foi encontrado.");
+
+            cliente.Ativo = false;
+            cliente.DataInativacao = DateTime.UtcNow;
+            cliente.Nome = new string('*', cliente.Nome.Length);
+            cliente.Sobrenome = new string('*', cliente.Sobrenome.Length);
+            cliente.CPF = new string('*', cliente.CPF.Length);            
+            cliente.Endereco = new string('*', string.IsNullOrEmpty(cliente.Endereco) ? 10 : cliente.Endereco.Length);
+            cliente.NumeroTelefone = new string('*', string.IsNullOrEmpty(cliente.NumeroTelefone) ? 10 : cliente.NumeroTelefone.Length);
             return await _context.SaveChangesAsync();
         }
 
